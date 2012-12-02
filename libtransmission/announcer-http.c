@@ -79,8 +79,8 @@ announce_url_new( const tr_session * session, const tr_announce_request * req )
                               escaped_info_hash,
                               PEER_ID_LEN, PEER_ID_LEN, req->peer_id,
                               req->port,
-                              req->down,
-                              req->down,
+                              req->up,
+                              0LL /* req->down */,
                               req->leftUntilComplete,
                               req->numwant,
                               req->key );
