@@ -79,7 +79,7 @@ announce_url_new( const tr_session * session, const tr_announce_request * req )
                               escaped_info_hash,
                               PEER_ID_LEN, PEER_ID_LEN, req->peer_id,
                               req->port,
-                              req->up,
+                              req->down,
                               req->down,
                               req->leftUntilComplete,
                               req->numwant,
@@ -290,9 +290,6 @@ tr_tracker_http_announce( tr_session                 * session,
     char * url = announce_url_new( session, request );
 
     d = tr_new0( struct announce_data, 1 );
-    d->response.seeders = -1;
-    d->response.leechers = -1;
-    d->response.downloads = -1;
     d->response_func = response_func;
     d->response_func_user_data = response_func_user_data;
     memcpy( d->response.info_hash, request->info_hash, SHA_DIGEST_LENGTH );
@@ -466,9 +463,6 @@ tr_tracker_http_scrape( tr_session               * session,
     for( i=0; i<d->response.row_count; ++i )
     {
         memcpy( d->response.rows[i].info_hash, request->info_hash[i], SHA_DIGEST_LENGTH );
-        d->response.rows[i].seeders = -1;
-        d->response.rows[i].leechers = -1;
-        d->response.rows[i].downloads = -1;
     }
     tr_strlcpy( d->log_name, request->log_name, sizeof( d->log_name ) );
 

@@ -621,6 +621,22 @@ calculatePiecePriority( const tr_torrent * tor,
 }
 
 static void
+correctPriority(tr_piece_index_t p, tr_info *inf)
+{
+    tr_priority_t priority;
+    if(p>=(inf->pieceCount/3)*2){
+        priority = TR_PRI_LOW;
+        inf->pieces[p].priority = priority;
+    }else if(p>=inf->pieceCount/3&&p<=(inf->pieceCount/3)*2){
+        priority = TR_PRI_NORMAL;
+        inf->pieces[p].priority = priority;
+    }else if(p<=inf->pieceCount/3||p==inf->pieceCount){
+        priority = TR_PRI_HIGH;
+        inf->pieces[p].priority = priority;
+    }
+}
+
+static void
 tr_torrentInitFilePieces( tr_torrent * tor )
 {
     int * firstFiles;
@@ -658,9 +674,13 @@ tr_torrentInitFilePieces( tr_torrent * tor )
         assert( (int)f == firstFiles[p] );
     }
 #endif
+    
+    tr_priority_t priority;
 
-    for( p=0; p<inf->pieceCount; ++p )
+    for( p=0; p<inf->pieceCount; ++p ) {
         inf->pieces[p].priority = calculatePiecePriority( tor, p, firstFiles[p] );
+        correctPriority(p, inf);
+    }
 
     tr_free( firstFiles );
 }
