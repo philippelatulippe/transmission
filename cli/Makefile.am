@@ -27,5 +27,6 @@ transmission_cli_LDADD = \
     @OPENSSL_LIBS@ \
     @INTLLIBS@ \
     @ZLIB_LIBS@ \
+    @LTLIBICONV@ \
     @PTHREAD_LIBS@
 

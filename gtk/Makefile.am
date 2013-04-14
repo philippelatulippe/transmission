@@ -97,6 +97,7 @@ transmission_gtk_LDADD = \
     @LIBCURL_LIBS@ \
     @OPENSSL_LIBS@ \
     @ZLIB_LIBS@ \
+    @LTLIBICONV@ \
     @PTHREAD_LIBS@
 
 DESKTOP_IN_FILES=transmission-gtk.desktop.in

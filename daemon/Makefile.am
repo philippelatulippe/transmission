@@ -29,6 +29,7 @@ LDADD = \
     @OPENSSL_LIBS@ \
     @INTLLIBS@ \
     @ZLIB_LIBS@ \
+    @LTLIBICONV@ \
     @PTHREAD_LIBS@
 
 noinst_HEADERS = \

@@ -160,7 +160,8 @@ apps_ldadd = \
   @LIBEVENT_LIBS@ \
   @OPENSSL_LIBS@ \
   @PTHREAD_LIBS@ \
-  @ZLIB_LIBS@
+  @ZLIB_LIBS@ \
+  @LTLIBICONV@
 
 TEST_SOURCES = libtransmission-test.c
 
